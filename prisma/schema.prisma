@@ -1,0 +1,55 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+  previewFeatures = ["fullTextSearch", "fullTextIndex"]
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+  relationMode = "prisma"
+}
+
+model Restaurant{
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  name String @unique
+  description String 
+  location String
+  tags String[]
+  userId String
+  userName String
+  reviews Review[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Review{
+   id   String @id @default(auto()) @map("_id") @db.ObjectId
+   text String
+   rating Int
+   userId String
+   userName String
+   restaurant Restaurant @relation(fields: [restaurantId], references: [id])
+   restaurantId String  @db.ObjectId
+   votes Vote[]
+   createdAt DateTime @default(now())
+
+   @@index([restaurantId])
+}
+
+enum VoteType{
+  UP 
+  DOWN
+}
+
+model Vote {
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  type VoteType
+  userId String
+  userName String
+  reviewId String @db.ObjectId
+  review Review @relation(fields: [reviewId], references: [id], onDelete: Cascade)
+  @@unique([userId,reviewId])
+}
