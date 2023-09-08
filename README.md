@@ -110,6 +110,14 @@ DATABASE_URL=
 NEXT_PUBLIC_APP_URL="http://localhost:3000"
 ```
 
+### Setup Google Places
+
+Please read the documentation here on how to generate the API key to use Google Maps Javascript API.
+
+```shell
+https://tintef.github.io/react-google-places-autocomplete/docs/
+```
+
 ### Setup Prisma
 
 Add MongoDb Database (I am using Mongo Atlas)
