@@ -117,6 +117,7 @@ Please read the documentation here on how to generate the API key to use Google 
 ```shell
 https://tintef.github.io/react-google-places-autocomplete/docs/
 ```
+You will then need to update the "GooglePlacesScript.tsx" file with your API key.
 
 ### Setup Prisma
 
